@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class ResetActionFlags : StateMachineBehaviour {
 
@@ -14,6 +15,8 @@ public class ResetActionFlags : StateMachineBehaviour {
         character.isPerformingAction = false;
         character.canMove = true;
         character.canRotate = true;
+        
+        character.characterNetworkManager.isJumping.Value = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

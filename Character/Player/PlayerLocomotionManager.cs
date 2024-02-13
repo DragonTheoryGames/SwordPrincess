@@ -18,14 +18,14 @@ public class PlayerLocomotionManager : CharacterLocomotionManager {
     [Header("Movement")]
     Vector3 moveDirection;
     Vector3 targetRotation;
-    //float walkingSpeed = 0f;
-    //float runningSpeed = 0f;
+    float walkingSpeed = 2f;
+    float runningSpeed = 2f;
     float rotationSpeed = 15;
     //float backflipSpeed = -2;
 
     [Header("Jump")]
     [SerializeField] float jumpHeight = 2;
-    [SerializeField] float jumpingSpeed = 5;
+    [SerializeField] float jumpingSpeed = 3;
     [SerializeField] float freeFallMoveSpeed = 2;
     Vector3 jumpDirection;
 
@@ -90,12 +90,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager {
         moveDirection.Normalize();
 
         // NOT NEEDED WITH ROOT MOTION / DELETE?
-        // if (PlayerInputManager.singleton.moveAmount > 0.75f) {
-        //     player.characterController.Move(runningSpeed * Time.deltaTime * moveDirection) ;
-        // }
-        // else if (PlayerInputManager.singleton.moveAmount <= 0.25f) {
-        //      player.characterController.Move(walkingSpeed * Time.deltaTime * moveDirection) ;
-        // }
+        if (PlayerInputManager.singleton.moveAmount > 0.75f) {
+            player.characterController.Move(runningSpeed * Time.deltaTime * moveDirection) ;
+        }
+        else if (PlayerInputManager.singleton.moveAmount <= 0.25f) {
+             player.characterController.Move(walkingSpeed * Time.deltaTime * moveDirection) ;
+        }
     }
 
     void JumpingMovement() {
@@ -179,8 +179,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager {
     }
 
     public void PerformJump() {
-        if (isPressedJumped && !player.isGrounded) {player.playerNetworkManager.isJumping.Value = true;} //BUGFIX: Keeps isJumping true after player has left the ground.
-
         if (player.isPerformingAction) {return;}
         if (player.playerNetworkManager.currentStamina.Value <= 0) {return;}
         if (player.playerNetworkManager.isJumping.Value) {return;}
@@ -188,7 +186,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager {
 
         player.playerAnimatorManager.PlayAnimation(jump, false);
         ApplyJumpingVelocity();
-        isPressedJumped = true;
+        player.playerNetworkManager.isJumping.Value = true;
         player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 
         jumpDirection = PlayerCamera.singleton.cameraMain.transform.forward *
@@ -204,7 +202,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager {
     }
 
     public void ApplyJumpingVelocity() {
-        yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        yVelocity.y = Mathf.Sqrt(jumpHeight * -gravity);
     }
 
 }

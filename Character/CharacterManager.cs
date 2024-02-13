@@ -18,7 +18,6 @@ public class CharacterManager : NetworkBehaviour {
     public bool canMove = true;
     public bool canRotate = true;
     public bool isGrounded = false;
-    public bool isJumping = false;
 
     protected virtual void Awake(){
         DontDestroyOnLoad(this);
