@@ -10,12 +10,35 @@ public class CharacterAnimatorManager : MonoBehaviour {
     int vertical;
     int horizontal;
 
+    [Header("Damage Animation")]
+    [SerializeField] string hitFowardMedium01 = "Damage_Front_Big_ver_A";
+    [SerializeField] string hitBackwardMedium01 = "Damage_Back_Small_ver_A";
+    [SerializeField] string hitLeftMedium01 = "Damage_Left_Small_ver_A";
+    [SerializeField] string hitRightMedium01 = "Damage_Right_Small_ver_A";
+
+    public List<string> frontMediumDamage = new List<string>();
+    public List<string> backMediumDamage = new List<string>();
+    public List<string> leftMediumDamage = new List<string>();
+    public List<string> rightMediumDamage = new List<string>();
+
     // String Formatting
 
     protected virtual void Awake() {
         character = GetComponent<CharacterManager>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
+    }
+
+    protected virtual void Start() {
+        frontMediumDamage.Add(hitFowardMedium01);
+        backMediumDamage.Add(hitBackwardMedium01);
+        leftMediumDamage.Add(hitLeftMedium01);
+        rightMediumDamage.Add(hitRightMedium01);
+    }
+
+    public string GetAnimationFromList(List<string> animationList) {
+        int randomValue = Random.Range(0, animationList.Count);
+        return animationList[randomValue];
     }
 
     public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue) {

@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Video;
 
 public class WeaponDamageCollider : DamageCollider {
     
@@ -50,6 +48,8 @@ public class WeaponDamageCollider : DamageCollider {
         HealthDamage healthDamage = Instantiate(WorldCharacterEffectsManager.singleton.healthDamage);
         healthDamage.swiftDamage = swiftDamage;
         healthDamage.heavyDamage = heavyDamage;
+        healthDamage.contactPoint = contactPoint;
+        healthDamage.angleHitFrom = Vector3.SignedAngle(characterAttacking.transform.forward, damageTarget.transform.forward, Vector3.up);
 
         switch (characterAttacking.characterCombatManager.currentAttackType)
         {

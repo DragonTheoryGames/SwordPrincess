@@ -80,7 +80,7 @@ public class PlayerManager : CharacterManager {
         if (!IsServer && IsOwner) { //SERVER IS THE HOST SO NO NEED TO LOAD OTHER PLAYERS
             foreach(var player in WorldGameSessionManager.singleton.players) {
                 if(player != this) {
-                    player.LoadOtherPlayers();
+                    player.LoadOtherPlayers(player);
                 }
             }
         }
@@ -119,6 +119,7 @@ public class PlayerManager : CharacterManager {
     public override void ReviveCharacter() {
         base.ReviveCharacter();
         if (IsOwner) {
+            isDead = false;
             playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
             // RESTORE FOCUS
             // PLAY REZ EFFECTS
@@ -156,7 +157,7 @@ public class PlayerManager : CharacterManager {
         //PlayerUIManager.singleton.playerUIHUDManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
     }
 
-    public void LoadOtherPlayers() {
+    public void LoadOtherPlayers(PlayerManager otherPlayer) {
         // SYNC WEAPONS
         // SYNC PLAYERS
     }

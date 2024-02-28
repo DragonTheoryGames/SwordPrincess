@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(menuName = "Character Effects/Instant Effects/Health Damage")]
 public class HealthDamage : InstantCharacterEffects {
@@ -28,7 +29,7 @@ public class HealthDamage : InstantCharacterEffects {
     [Header("Animation")]
     public bool playDamageAnimation = true;
     public bool manuallySelectDamageAnimation = false;
-    public string newDamageAnimation;
+    public string damageAnimation;
 
     [Header("SFX")]
     public bool isPlaySFX = true;
@@ -40,12 +41,11 @@ public class HealthDamage : InstantCharacterEffects {
 
     public override void ProcessEffect(CharacterManager character) {
         base.ProcessEffect(character);
-
         if (character.characterNetworkManager.isDead.Value) {return;}
+        
         //CHECK FOR INVULNERABILITY
         CalculateDamage(character);
-        //CHECK DIRECTION
-        //PLAY ANIMATION
+        PlayDirectionalBasedDamageAnimation(character);
         //CHECK FOR BUILDUP
         PlayVFX(character);
         PlaySFX(character);
@@ -85,6 +85,34 @@ public class HealthDamage : InstantCharacterEffects {
         physicalDamageSFX = WorldSoundFXManager.singleton.RandomSFX(WorldSoundFXManager.singleton.physicalDamageSFX);
 
         character.characterSoundFXManager.PlaySFX(physicalDamageSFX);
+    }
+
+    void PlayDirectionalBasedDamageAnimation(CharacterManager character) {
+        if(!character.IsOwner) {return;}
+        if(character.isDead) {return;}
+        //Calculate if poise is broken
+        isPoiseBroken = true;
+
+        if(angleHitFrom >= 145 && angleHitFrom <= 180) {
+            damageAnimation = character.characterAnimatorManager.GetAnimationFromList(character.characterAnimatorManager.frontMediumDamage);
+        }
+        else if(angleHitFrom <= -145 && angleHitFrom >= -180) {
+            damageAnimation = character.characterAnimatorManager.GetAnimationFromList(character.characterAnimatorManager.frontMediumDamage);
+        }
+        else if(angleHitFrom >= -45 && angleHitFrom <= 45) {
+            damageAnimation = character.characterAnimatorManager.GetAnimationFromList(character.characterAnimatorManager.backMediumDamage);
+        }
+        else if(angleHitFrom >= 144 && angleHitFrom <= -45) {
+            damageAnimation = character.characterAnimatorManager.GetAnimationFromList(character.characterAnimatorManager.leftMediumDamage);
+        }
+        else if(angleHitFrom >= 45 && angleHitFrom <= 144) {
+            damageAnimation = character.characterAnimatorManager.GetAnimationFromList(character.characterAnimatorManager.rightMediumDamage);
+        }
+
+        // IF POISE IS BROKEN< PLAY STAGGERING ANIMATION
+        if (isPoiseBroken) {
+            character.characterAnimatorManager.PlayAnimation(damageAnimation, true);
+        }
     }
 
 }

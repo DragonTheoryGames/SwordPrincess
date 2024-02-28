@@ -18,7 +18,7 @@ public class DamageCollider : MonoBehaviour {
     public float fireDamage = 0;
 
     [Header("Contact Point")]
-    Vector3 contactPoint;
+    public Vector3 contactPoint;
 
     [Header("Characters Damage")]
     protected List<CharacterManager> charactersDamaged = new List<CharacterManager>();

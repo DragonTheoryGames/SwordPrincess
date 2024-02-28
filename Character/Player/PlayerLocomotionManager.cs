@@ -89,7 +89,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager {
         moveDirection.y = 0;
         moveDirection.Normalize();
 
-        // NOT NEEDED WITH ROOT MOTION / DELETE?
         if (PlayerInputManager.singleton.moveAmount > 0.75f) {
             player.characterController.Move(runningSpeed * Time.deltaTime * moveDirection) ;
         }

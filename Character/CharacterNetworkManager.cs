@@ -24,6 +24,8 @@ public class CharacterNetworkManager : NetworkBehaviour {
     [Header("Flags")]
     public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    
 
     [Header("Stats")]
     public NetworkVariable<int> vitality = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -94,7 +96,7 @@ public class CharacterNetworkManager : NetworkBehaviour {
     }
 
     //DAMAGE
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void NotifyServerOfDamageServerRpc(
         ulong damagedCharacterID, 
         ulong attackingCharacterID,

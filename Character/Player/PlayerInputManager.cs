@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,9 @@ public class PlayerInputManager : MonoBehaviour {
     [SerializeField] Vector2 cameraInput;
     public float cameraVerticalInput;
     public float cameraHorizontalInput;
+
+    [Header("Lock On Input")]
+    [SerializeField] bool LockOnInput;
 
     [Header("Action Controls")]
     [SerializeField] bool dodgeInput = false;
@@ -49,6 +53,7 @@ public class PlayerInputManager : MonoBehaviour {
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
             playerControls.PlayerActions.QuickAttack.performed += i => swiftAttackInput = true;
+            playerControls.PlayerActions.LockOn.performed += i => LockOnInput = true;
         }
 
         playerControls.Enable();
@@ -65,6 +70,7 @@ public class PlayerInputManager : MonoBehaviour {
         SprintInput();
         JumpInput();
         SwiftAttack();
+        LockOn();
     }
 
     void OnApplicationFocus(bool focus) {
@@ -128,6 +134,33 @@ public class PlayerInputManager : MonoBehaviour {
         if (swiftAttackInput) { 
             swiftAttackInput = false; 
             player.playerCombatManager.PerformWeaponAction(player.playerInventoryManager.currentWeapon.swiftAttack, player.playerInventoryManager.currentWeapon);
+        }
+    }
+
+    void LockOn(){
+        if (player.playerNetworkManager.isLockedOn.Value) {
+            if (player.playerCombatManager.currentTarget == null) {return;}
+            
+            if (player.playerCombatManager.currentTarget.isDead) {
+                player.playerNetworkManager.isLockedOn.Value = false;
+            }
+            //attempt to find new target or unlock completely
+        }
+        if (LockOnInput && player.playerNetworkManager.isLockedOn.Value) {
+            LockOnInput = false;
+            //Disable Lock On.
+            return;
+        }
+        if (LockOnInput && !player.playerNetworkManager.isLockedOn.Value) {
+            LockOnInput = false; 
+            //Enable Lock On
+            PlayerCamera.singleton.TargetLockOn();
+
+            if(PlayerCamera.singleton.nearestTarget != null) {
+                //TODO Set as target
+                player.playerNetworkManager.isLockedOn.Value = true;
+            }
+            return;
         }
     }
 
