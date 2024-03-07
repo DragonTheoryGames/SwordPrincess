@@ -61,7 +61,7 @@ public class PlayerCamera : MonoBehaviour {
 
     void Rotation() {
         if (player.playerNetworkManager.isLockedOn.Value) { //LOCKED ON ROTATION
-            Vector3 rotationDirection = player.playerCombatManager.lockOnTransform.position - transform.position;
+            Vector3 rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - transform.position;
             rotationDirection.Normalize();
             rotationDirection.y = 0;
 
@@ -69,7 +69,7 @@ public class PlayerCamera : MonoBehaviour {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lockOnFollowSpeed);
 
             //Y ROTATION
-            rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position = cameraPivotTransform.position;
+            rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - cameraPivotTransform.position;
             rotationDirection.Normalize();
 
             targetRotation = Quaternion.LookRotation(rotationDirection);
