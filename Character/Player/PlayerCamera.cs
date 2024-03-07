@@ -65,15 +65,16 @@ public class PlayerCamera : MonoBehaviour {
             rotationDirection.Normalize();
             rotationDirection.y = 0;
 
+            //Y ROTATION
             Quaternion targetRotation = Quaternion.LookRotation(rotationDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lockOnFollowSpeed);
 
             //Y ROTATION
             rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - cameraPivotTransform.position;
             rotationDirection.Normalize();
+            cameraPivotTransform.transform.rotation = Quaternion.Slerp(cameraPivotTransform.rotation, targetRotation, lockOnFollowSpeed);
 
             targetRotation = Quaternion.LookRotation(rotationDirection);
-            cameraPivotTransform.transform.rotation = Quaternion.Slerp(cameraPivotTransform.rotation, targetRotation, lockOnFollowSpeed);
 
             //SAVE ROTATION TO LOOK ANGLE
             horizontalAngle = transform.eulerAngles.y;
