@@ -33,6 +33,7 @@ public class PlayerCamera : MonoBehaviour {
     [SerializeField] float maximumViewableAngle = 50f;
     List<CharacterManager> availableTargets = new List<CharacterManager>();
     public CharacterManager nearestTarget;
+    [SerializeField] float lockOnFollowSpeed = 0.2f;
 
     void Awake() {
         if(singleton == null) {singleton = this;}
@@ -59,10 +60,26 @@ public class PlayerCamera : MonoBehaviour {
     }
 
     void Rotation() {
-        //LOCK ON
-        //ELSE ROTATE ON PLAYER
+        if (player.playerNetworkManager.isLockedOn.Value) { //LOCKED ON ROTATION
+            Vector3 rotationDirection = player.playerCombatManager.lockOnTransform.position - transform.position;
+            rotationDirection.Normalize();
+            rotationDirection.y = 0;
 
-        //NORMAL ROTATION
+            Quaternion targetRotation = Quaternion.LookRotation(rotationDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lockOnFollowSpeed);
+
+            //Y ROTATION
+            rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position = cameraPivotTransform.position;
+            rotationDirection.Normalize();
+
+            targetRotation = Quaternion.LookRotation(rotationDirection);
+            cameraPivotTransform.transform.rotation = Quaternion.Slerp(cameraPivotTransform.rotation, targetRotation, lockOnFollowSpeed);
+
+            //SAVE ROTATION TO LOOK ANGLE
+            horizontalAngle = transform.eulerAngles.y;
+            verticalAngle = transform.eulerAngles.x;
+        }
+        else { //NORMAL ROTATION
         horizontalAngle += PlayerInputManager.singleton.cameraHorizontalInput * horizontalRotationSpeed * Time.deltaTime;
         verticalAngle += PlayerInputManager.singleton.cameraVerticalInput * verticalRotationSpeed * Time.deltaTime;
         verticalAngle = Mathf.Clamp(verticalAngle, minPivot, maxPivot);
@@ -78,6 +95,7 @@ public class PlayerCamera : MonoBehaviour {
         cameraRotation.x = -verticalAngle;
         targetRotation = Quaternion.Euler(cameraRotation);
         cameraPivotTransform.localRotation = targetRotation;
+        }
     }
 
     void Collisions() {
@@ -145,6 +163,15 @@ public class PlayerCamera : MonoBehaviour {
                     nearestTarget = availableTargets[i];
                 }
             }
+            else {
+                ClearLockOnTargets();
+                player.playerNetworkManager.isLockedOn.Value = false;
+            }
         }
+    }
+
+    public void ClearLockOnTargets() {
+        nearestTarget = null;
+        availableTargets.Clear();
     }
 }

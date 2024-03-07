@@ -148,6 +148,8 @@ public class PlayerInputManager : MonoBehaviour {
         }
         if (LockOnInput && player.playerNetworkManager.isLockedOn.Value) {
             LockOnInput = false;
+            PlayerCamera.singleton.ClearLockOnTargets();
+            player.playerNetworkManager.isLockedOn.Value = false;
             //Disable Lock On.
             return;
         }
@@ -158,6 +160,7 @@ public class PlayerInputManager : MonoBehaviour {
 
             if(PlayerCamera.singleton.nearestTarget != null) {
                 //TODO Set as target
+                player.playerCombatManager.SetTarget(PlayerCamera.singleton.nearestTarget);
                 player.playerNetworkManager.isLockedOn.Value = true;
             }
             return;

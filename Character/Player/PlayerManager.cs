@@ -67,6 +67,11 @@ public class PlayerManager : CharacterManager {
             playerNetworkManager.currentWeaponID.OnValueChanged += playerNetworkManager.OnCurrentWeaponIDChange;
         }
 
+        //LOCKON
+        playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+        playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
+
+        //STATS
         playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
 
         // UPON CONNECTING AS MULTIPLAYER, GRAB STATS
@@ -160,5 +165,9 @@ public class PlayerManager : CharacterManager {
     public void LoadOtherPlayers(PlayerManager otherPlayer) {
         // SYNC WEAPONS
         // SYNC PLAYERS
+        // SYNC LOCKON
+        if (playerNetworkManager.isLockedOn.Value) {
+            playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+        }
     }
 }
