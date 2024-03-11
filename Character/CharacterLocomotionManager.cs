@@ -22,6 +22,9 @@ public class CharacterLocomotionManager : MonoBehaviour {
     [SerializeField] protected float gravity = -9.8f;
     [SerializeField] protected float groundedGravity = -9.8f;
 
+    [Header("Flags")]
+    public bool isRolling = false;
+
     protected virtual void Awake() {
         character = GetComponent<CharacterManager>();
     }

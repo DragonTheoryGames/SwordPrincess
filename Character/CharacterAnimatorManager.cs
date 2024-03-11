@@ -42,10 +42,18 @@ public class CharacterAnimatorManager : MonoBehaviour {
     }
 
     public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue) {
-        if (Mathf.Abs(verticalValue) < .2) {verticalValue = 0;}
-        if (Mathf.Abs(horizontalValue) < .2) {horizontalValue = 0;}
-        character.animator.SetFloat(horizontal, horizontalValue, .1f, Time.deltaTime);
-        character.animator.SetFloat(vertical, verticalValue, .1f, Time.deltaTime);
+        //SNAPPING MOVEMENT
+        float snappedvertical = verticalValue;
+        float snappedhorizontal = horizontalValue;
+        if (Mathf.Abs(snappedvertical) < .1f) {snappedvertical = 0;}
+        if (Mathf.Abs(snappedhorizontal) < .1f) {snappedhorizontal = 0;}
+        if (snappedvertical >= .1f && snappedvertical < .5f) {snappedvertical = .5f;}
+        if (snappedvertical <= -.1f && snappedvertical > -.5f) {snappedvertical = -.5f;}
+        if (snappedhorizontal >= .1f && snappedhorizontal < .5f) {snappedhorizontal = .5f;}
+        if (snappedhorizontal <= -.1f && snappedhorizontal > -.5f) {snappedhorizontal = -.5f;}
+
+        character.animator.SetFloat(vertical, snappedvertical, .1f, Time.deltaTime);
+        character.animator.SetFloat(horizontal, snappedhorizontal, .1f, Time.deltaTime);
     }
 
     public virtual void PlayAnimation(string animation, bool isPerformingAction, bool canRotate = false, bool canMove = false) {
