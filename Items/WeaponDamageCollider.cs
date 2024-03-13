@@ -10,6 +10,7 @@ public class WeaponDamageCollider : DamageCollider {
 
     [Header("Weapon Attack Modifier")]
     public float swiftAttack01Modifier;
+    public float strongAttack01Modifier;
 
     protected override void Awake() {
         base.Awake();
@@ -47,7 +48,7 @@ public class WeaponDamageCollider : DamageCollider {
 
         HealthDamage healthDamage = Instantiate(WorldCharacterEffectsManager.singleton.healthDamage);
         healthDamage.swiftDamage = swiftDamage;
-        healthDamage.heavyDamage = heavyDamage;
+        healthDamage.strongDamage = strongDamage;
         healthDamage.contactPoint = contactPoint;
         healthDamage.angleHitFrom = Vector3.SignedAngle(characterAttacking.transform.forward, damageTarget.transform.forward, Vector3.up);
 
@@ -55,6 +56,9 @@ public class WeaponDamageCollider : DamageCollider {
         {
             case AttackType.SwiftAttack01:
                 ApplyAttackDamageModifiers(swiftAttack01Modifier, healthDamage);
+                break;
+            case AttackType.StrongAttack01:
+                ApplyAttackDamageModifiers(strongAttack01Modifier, healthDamage);
                 break;
             default:
                 break;
@@ -65,7 +69,7 @@ public class WeaponDamageCollider : DamageCollider {
                 damageTarget.NetworkObjectId,
                 characterAttacking.NetworkObjectId,
                 healthDamage.swiftDamage,
-                healthDamage.heavyDamage,
+                healthDamage.strongDamage,
                 healthDamage.poiseDamage,
                 healthDamage.angleHitFrom,
                 healthDamage.contactPoint.x,

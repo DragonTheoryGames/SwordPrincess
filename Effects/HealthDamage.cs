@@ -10,7 +10,7 @@ public class HealthDamage : InstantCharacterEffects {
 
     [Header("Damage")]
     public float swiftDamage = 0;
-    public float heavyDamage = 0;
+    public float strongDamage = 0;
 
     public float lightningDamage = 0;
     public float iceDamage = 0;
@@ -63,7 +63,7 @@ public class HealthDamage : InstantCharacterEffects {
         //ADD ALL DAMAGE TOGETHER
         //APPLY DAMAGE
         finalDamgeDealt = Mathf.RoundToInt( swiftDamage +
-                                            heavyDamage +
+                                            strongDamage +
                                             lightningDamage +
                                             iceDamage +
                                             gravityDamage +

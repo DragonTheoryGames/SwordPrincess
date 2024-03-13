@@ -13,8 +13,9 @@ public class WeaponManager : MonoBehaviour {
     public void SetWeaponDamage(CharacterManager owner, WeaponItem weapon) {
         damageCollider.characterAttacking = owner;
         damageCollider.swiftDamage = weapon.swiftDamage;
-        damageCollider.heavyDamage = weapon.heavyDamage;
+        damageCollider.strongDamage = weapon.strongDamage;
 
         damageCollider.swiftAttack01Modifier = weapon.swiftAttack01DamageModifier;
+        damageCollider.swiftAttack01Modifier = weapon.strongAttack01DamageModifier;
     }
 }

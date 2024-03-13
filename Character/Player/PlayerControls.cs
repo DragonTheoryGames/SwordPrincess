@@ -274,6 +274,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""StrongAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""36213c5d-5599-4a55-8d7f-9c69d27fa46a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShatterAttack"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7f6b84a0-29e7-46c3-a9eb-6d497bef71be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(pressPoint=0.1)"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LockOn"",
                     ""type"": ""Button"",
                     ""id"": ""c973e65e-b689-4c1d-acbc-4f4aaeb2f49f"",
@@ -433,6 +451,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LockOnRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""656e1105-35cf-4f4b-b726-401c0c2ce47c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StrongAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d07c48f1-01e2-485b-b7de-2301e71e39fa"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StrongAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d41471de-38a4-48ed-b187-a4c8e8f9ca3a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShatterAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d561324-68f9-4e07-a2a5-3902df5fdcf3"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShatterAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -499,6 +561,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerActions_QuickAttack = m_PlayerActions.FindAction("QuickAttack", throwIfNotFound: true);
+        m_PlayerActions_StrongAttack = m_PlayerActions.FindAction("StrongAttack", throwIfNotFound: true);
+        m_PlayerActions_ShatterAttack = m_PlayerActions.FindAction("ShatterAttack", throwIfNotFound: true);
         m_PlayerActions_LockOn = m_PlayerActions.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerActions_LockOnLeft = m_PlayerActions.FindAction("LockOnLeft", throwIfNotFound: true);
         m_PlayerActions_LockOnRight = m_PlayerActions.FindAction("LockOnRight", throwIfNotFound: true);
@@ -663,6 +727,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Sprint;
     private readonly InputAction m_PlayerActions_QuickAttack;
+    private readonly InputAction m_PlayerActions_StrongAttack;
+    private readonly InputAction m_PlayerActions_ShatterAttack;
     private readonly InputAction m_PlayerActions_LockOn;
     private readonly InputAction m_PlayerActions_LockOnLeft;
     private readonly InputAction m_PlayerActions_LockOnRight;
@@ -674,6 +740,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
         public InputAction @QuickAttack => m_Wrapper.m_PlayerActions_QuickAttack;
+        public InputAction @StrongAttack => m_Wrapper.m_PlayerActions_StrongAttack;
+        public InputAction @ShatterAttack => m_Wrapper.m_PlayerActions_ShatterAttack;
         public InputAction @LockOn => m_Wrapper.m_PlayerActions_LockOn;
         public InputAction @LockOnLeft => m_Wrapper.m_PlayerActions_LockOnLeft;
         public InputAction @LockOnRight => m_Wrapper.m_PlayerActions_LockOnRight;
@@ -698,6 +766,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @QuickAttack.started += instance.OnQuickAttack;
             @QuickAttack.performed += instance.OnQuickAttack;
             @QuickAttack.canceled += instance.OnQuickAttack;
+            @StrongAttack.started += instance.OnStrongAttack;
+            @StrongAttack.performed += instance.OnStrongAttack;
+            @StrongAttack.canceled += instance.OnStrongAttack;
+            @ShatterAttack.started += instance.OnShatterAttack;
+            @ShatterAttack.performed += instance.OnShatterAttack;
+            @ShatterAttack.canceled += instance.OnShatterAttack;
             @LockOn.started += instance.OnLockOn;
             @LockOn.performed += instance.OnLockOn;
             @LockOn.canceled += instance.OnLockOn;
@@ -723,6 +797,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @QuickAttack.started -= instance.OnQuickAttack;
             @QuickAttack.performed -= instance.OnQuickAttack;
             @QuickAttack.canceled -= instance.OnQuickAttack;
+            @StrongAttack.started -= instance.OnStrongAttack;
+            @StrongAttack.performed -= instance.OnStrongAttack;
+            @StrongAttack.canceled -= instance.OnStrongAttack;
+            @ShatterAttack.started -= instance.OnShatterAttack;
+            @ShatterAttack.performed -= instance.OnShatterAttack;
+            @ShatterAttack.canceled -= instance.OnShatterAttack;
             @LockOn.started -= instance.OnLockOn;
             @LockOn.performed -= instance.OnLockOn;
             @LockOn.canceled -= instance.OnLockOn;
@@ -817,6 +897,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnQuickAttack(InputAction.CallbackContext context);
+        void OnStrongAttack(InputAction.CallbackContext context);
+        void OnShatterAttack(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
         void OnLockOnLeft(InputAction.CallbackContext context);
         void OnLockOnRight(InputAction.CallbackContext context);

@@ -252,6 +252,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "StrongAttack",
+                    "type": "Button",
+                    "id": "36213c5d-5599-4a55-8d7f-9c69d27fa46a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShatterAttack",
+                    "type": "PassThrough",
+                    "id": "7f6b84a0-29e7-46c3-a9eb-6d497bef71be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(pressPoint=0.1)",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LockOn",
                     "type": "Button",
                     "id": "c973e65e-b689-4c1d-acbc-4f4aaeb2f49f",
@@ -409,6 +427,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "LockOnRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "656e1105-35cf-4f4b-b726-401c0c2ce47c",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StrongAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d07c48f1-01e2-485b-b7de-2301e71e39fa",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StrongAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d41471de-38a4-48ed-b187-a4c8e8f9ca3a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShatterAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d561324-68f9-4e07-a2a5-3902df5fdcf3",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShatterAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -29,6 +29,7 @@ public class CharacterNetworkManager : NetworkBehaviour {
     public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isChargingAttack = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     
 
     [Header("Stats")]
@@ -71,6 +72,10 @@ public class CharacterNetworkManager : NetworkBehaviour {
         if (!isLockedOn) {
             character.characterCombatManager.currentTarget = null;
         }
+    }
+
+    public void OnIsChargingAttackChanged(bool oldStatus, bool newStatus) {
+        character.animator.SetBool("isChargingAttack", isChargingAttack.Value);
     }
 
     //ACTIONS
@@ -181,7 +186,7 @@ public class CharacterNetworkManager : NetworkBehaviour {
     
         HealthDamage healthDamage = Instantiate(WorldCharacterEffectsManager.singleton.healthDamage);
         healthDamage.swiftDamage = swiftDamage;
-        healthDamage.heavyDamage = heavyDamage;
+        healthDamage.strongDamage = heavyDamage;
         //ADD OTHER DAMAGE TYPES
         healthDamage.angleHitFrom = hitAngle;
         healthDamage.contactPoint = new Vector3(contactpointX, contactpointY, contactpointZ);

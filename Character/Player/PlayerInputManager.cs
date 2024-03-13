@@ -31,7 +31,13 @@ public class PlayerInputManager : MonoBehaviour {
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     [SerializeField] bool jumpInput = false;
+
+    [Header("Attack Inputs")]
     [SerializeField] bool swiftAttackInput = false;
+    [SerializeField] bool strongAttackInput = false;
+    
+    [Header("Special Abilities")]
+    [SerializeField] bool shatterAttackInput = false;
 
     void Awake() {
         if(singleton == null) {singleton = this;}
@@ -56,9 +62,13 @@ public class PlayerInputManager : MonoBehaviour {
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
             playerControls.PlayerActions.QuickAttack.performed += i => swiftAttackInput = true;
+            playerControls.PlayerActions.StrongAttack.performed += i => strongAttackInput = true;
             playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
             playerControls.PlayerActions.LockOnLeft.performed += i => lockOnLeftInput = true;
             playerControls.PlayerActions.LockOnRight.performed += i => lockOnRightInput = true;
+
+            playerControls.PlayerActions.ShatterAttack.performed += i => shatterAttackInput = true;
+            playerControls.PlayerActions.ShatterAttack.canceled += i => shatterAttackInput = false;
         }
 
         playerControls.Enable();
@@ -75,6 +85,8 @@ public class PlayerInputManager : MonoBehaviour {
         SprintInput();
         JumpInput();
         SwiftAttackInput();
+        StrongAttackInput();
+        ShatterAttackInput();
         LockOnInput();
         LockOnSwitchInput();
     }
@@ -148,6 +160,19 @@ public class PlayerInputManager : MonoBehaviour {
         }
     }
 
+    void StrongAttackInput() {
+        if (strongAttackInput) { 
+            strongAttackInput = false; 
+            player.playerCombatManager.PerformWeaponAction(player.playerInventoryManager.currentWeapon.strongAttack, player.playerInventoryManager.currentWeapon);
+        }
+    }
+
+    void ShatterAttackInput() {
+        if (player.isPerformingAction) {
+            player.playerNetworkManager.isChargingAttack.Value = shatterAttackInput;
+        }
+    }
+
     void LockOnInput(){
         if (player.playerNetworkManager.isLockedOn.Value) {
             if (player.playerCombatManager.currentTarget == null) {return;}
@@ -156,7 +181,7 @@ public class PlayerInputManager : MonoBehaviour {
                 player.playerNetworkManager.isLockedOn.Value = false;
             }
             //Attempt to find new target or unlock completely
-            //THIS ASSURES US THE COROUTINE ONLY RUNES ONCE AT A TIME
+            //THIS ASSURES US THE COROUTINE ONLY RUNS ONCE AT A TIME
             if (lockOnCoroutine != null) {
                 StopCoroutine(lockOnCoroutine);
                 lockOnCoroutine = StartCoroutine(PlayerCamera.singleton.WaitThenFIndNewTargets());
@@ -175,7 +200,6 @@ public class PlayerInputManager : MonoBehaviour {
             PlayerCamera.singleton.TargetLockOn();
 
             if(PlayerCamera.singleton.nearestTarget != null) {
-                //TODO Set as target
                 player.playerCombatManager.SetTarget(PlayerCamera.singleton.nearestTarget);
                 player.playerNetworkManager.isLockedOn.Value = true;
             }

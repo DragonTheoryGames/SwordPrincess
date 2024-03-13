@@ -9,7 +9,7 @@ public class DamageCollider : MonoBehaviour {
 
     [Header("Damage")]
     public float swiftDamage = 0;
-    public float heavyDamage = 0;
+    public float strongDamage = 0;
 
     public float magicDamage = 0;
     public float windDamage = 0;
@@ -44,7 +44,7 @@ public class DamageCollider : MonoBehaviour {
 
         HealthDamage healthDamage = Instantiate(WorldCharacterEffectsManager.singleton.healthDamage);
         healthDamage.swiftDamage = swiftDamage;
-        healthDamage.heavyDamage = heavyDamage;
+        healthDamage.strongDamage = strongDamage;
         healthDamage.ProcessEffect(damageTarget);
     }
 

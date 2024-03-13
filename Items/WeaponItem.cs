@@ -12,7 +12,7 @@ public class WeaponItem : Item {
     
     [Header("Base Damage")]
     public int swiftDamage = 0;
-    public int heavyDamage = 0;
+    public int strongDamage = 0;
     public int magicDamage = 0;
     
     public int lightningDamage = 0;
@@ -25,17 +25,20 @@ public class WeaponItem : Item {
 
     [Header("Attack Modifiers")]
     public float swiftAttack01DamageModifier = 1;
+    public float strongAttack01DamageModifier = 1.5f;
     // WEAPON MODIFIER
     // CRITICAL MOD
 
     [Header("Stamina Cost")]
     public int baseStaminaCost = 20;
     public float swiftAttack01StaminaMultiplier = 1;
+    public float strongAttack01StaminaMultiplier = 1.5f;
     // RUNNING MOD
     // AIR MOD
 
     [Header("Actions")]
     public WeaponItemAction swiftAttack;
+    public WeaponItemAction strongAttack;
     // WEAPON DEFLECTION
     // CAN BE BUFFED
 

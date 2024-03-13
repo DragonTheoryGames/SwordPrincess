@@ -25,6 +25,9 @@ public enum WeaponModelSlot {
     LeftHand,
 }
 
+//CALCULATE DAMAGE BASED ON ATTACK TYPE
 public enum AttackType {
     SwiftAttack01,
+    SwiftAttack02,
+    StrongAttack01,
 }

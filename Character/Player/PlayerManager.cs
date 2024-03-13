@@ -67,9 +67,10 @@ public class PlayerManager : CharacterManager {
             playerNetworkManager.currentWeaponID.OnValueChanged += playerNetworkManager.OnCurrentWeaponIDChange;
         }
 
-        //LOCKON
+        //Flags
         playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
         playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
+        playerNetworkManager.isChargingAttack.OnValueChanged += playerNetworkManager.OnIsChargingAttackChanged;
 
         //STATS
         playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
@@ -78,6 +79,31 @@ public class PlayerManager : CharacterManager {
         if(IsOwner && !IsServer) {
             LoadPlayerGame(ref WorldSaveGameManager.singleton.currentCharacterData);
         }
+    }
+
+    public override void OnNetworkDespawn() {
+        base.OnNetworkDespawn();
+         NetworkManager.Singleton.OnClientConnectedCallback -=  OnClientConnectedCallback;
+
+        if (IsOwner) {
+            //Update MaxResources on Stat change.
+            playerNetworkManager.vitality.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
+            playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
+            //Updates UI Resource Bars
+            playerNetworkManager.currentHealth.OnValueChanged -= PlayerUIManager.singleton.playerUIHUDManager.SetNewHealthValue;
+            playerNetworkManager.currentStamina.OnValueChanged -= PlayerUIManager.singleton.playerUIHUDManager.SetNewStaminaValue;
+            playerNetworkManager.currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
+            //EQUIPMENT
+            playerNetworkManager.currentWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentWeaponIDChange;
+        }
+
+        //Flags
+        playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;
+        playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged -= playerNetworkManager.OnLockOnTargetIDChange;
+        playerNetworkManager.isChargingAttack.OnValueChanged -= playerNetworkManager.OnIsChargingAttackChanged;
+
+        //STATS
+        playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHP;
     }
 
     void OnClientConnectedCallback(ulong clientID) {
