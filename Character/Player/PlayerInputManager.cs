@@ -31,6 +31,10 @@ public class PlayerInputManager : MonoBehaviour {
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     [SerializeField] bool jumpInput = false;
+    [SerializeField] bool useUpAlchemySlot = false;
+    [SerializeField] bool useDownAlchemySlot = false;
+    [SerializeField] bool useLeftAlchemySlot = false;
+    [SerializeField] bool useRightAlchemySlot = false;
 
     [Header("Attack Inputs")]
     [SerializeField] bool swiftAttackInput = false;
@@ -57,15 +61,22 @@ public class PlayerInputManager : MonoBehaviour {
             playerControls = new PlayerControls();
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.CameraControls.performed += i => cameraInput = i.ReadValue<Vector2>();
+            
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
             playerControls.PlayerActions.QuickAttack.performed += i => swiftAttackInput = true;
             playerControls.PlayerActions.StrongAttack.performed += i => strongAttackInput = true;
+            
             playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
             playerControls.PlayerActions.LockOnLeft.performed += i => lockOnLeftInput = true;
             playerControls.PlayerActions.LockOnRight.performed += i => lockOnRightInput = true;
+
+            playerControls.PlayerActions.AlchemySlotUp.performed += i => useUpAlchemySlot = true;
+            playerControls.PlayerActions.AlchemySlotDown.performed += i => useDownAlchemySlot = true;
+            playerControls.PlayerActions.AlchemySlotLeft.performed += i => useLeftAlchemySlot = true;
+            playerControls.PlayerActions.AlchemySlotRight.performed += i => useRightAlchemySlot = true;
 
             playerControls.PlayerActions.ShatterAttack.performed += i => shatterAttackInput = true;
             playerControls.PlayerActions.ShatterAttack.canceled += i => shatterAttackInput = false;

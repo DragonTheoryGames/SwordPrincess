@@ -266,7 +266,7 @@
                     "id": "7f6b84a0-29e7-46c3-a9eb-6d497bef71be",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(pressPoint=0.1)",
+                    "interactions": "Hold(pressPoint=0.3)",
                     "initialStateCheck": false
                 },
                 {
@@ -291,6 +291,42 @@
                     "name": "LockOnRight",
                     "type": "Button",
                     "id": "a2ccf48a-baf0-4d6c-b90d-169bb8de0946",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AlchemySlotUp",
+                    "type": "Button",
+                    "id": "58615090-d18f-4cf8-8d8f-1af10abfd64e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AlchemySlotDown",
+                    "type": "Button",
+                    "id": "5800c80d-c056-46fb-862a-298cd9992015",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AlchemySlotLeft",
+                    "type": "Button",
+                    "id": "1a61ca2a-8f5b-417a-8d00-d28991285d5d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AlchemySlotRight",
+                    "type": "Button",
+                    "id": "1c50744a-afc8-4dd7-9bee-add95a45d070",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -471,6 +507,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShatterAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6e55fb3-f37e-42bb-8ea9-c40d6c898436",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "718732ac-3af7-4fda-a41a-46e898fb738d",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd5ec085-22a9-4c59-bcef-3df24abf8c82",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82d7f00c-3076-4853-a105-ca04bd37290f",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "473d6318-9b3f-4f14-87b6-aa80de29d8b8",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8859bb47-160c-4423-9476-a3441dd1e787",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8f2351d-8316-434b-8798-7f98bf5bd857",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "220c343e-5edd-4ef2-88e8-8696abdd9fd8",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlchemySlotRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

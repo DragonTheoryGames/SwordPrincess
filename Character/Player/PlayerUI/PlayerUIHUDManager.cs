@@ -1,9 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIHUDManager : MonoBehaviour {
     
+    [Header("STAT BARS")]
     [SerializeField] UIIStatBar healthBar;
     [SerializeField] UIIStatBar staminaBar;
+
+    [Header("ALCHEMY SLOTS")]
+    [SerializeField] Image topAlchemySlotIcon;
+    [SerializeField] Image rightAlchemySlotIcon;
+    [SerializeField] Image bottomAlchemySlotIcon;
+    [SerializeField] Image leftAlchemySlotIcon;
 
     public void RefreshHUD() {
         healthBar.gameObject.SetActive(false);
@@ -32,4 +40,7 @@ public class PlayerUIHUDManager : MonoBehaviour {
         RefreshHUD();
     }
     
+    public void SetRightAlchemyIcon(){
+        
+    }
 }

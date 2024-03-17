@@ -288,7 +288,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""7f6b84a0-29e7-46c3-a9eb-6d497bef71be"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(pressPoint=0.1)"",
+                    ""interactions"": ""Hold(pressPoint=0.3)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -313,6 +313,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""LockOnRight"",
                     ""type"": ""Button"",
                     ""id"": ""a2ccf48a-baf0-4d6c-b90d-169bb8de0946"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlchemySlotUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""58615090-d18f-4cf8-8d8f-1af10abfd64e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlchemySlotDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""5800c80d-c056-46fb-862a-298cd9992015"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlchemySlotLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a61ca2a-8f5b-417a-8d00-d28991285d5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlchemySlotRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c50744a-afc8-4dd7-9bee-add95a45d070"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -495,6 +531,94 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ShatterAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6e55fb3-f37e-42bb-8ea9-c40d6c898436"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""718732ac-3af7-4fda-a41a-46e898fb738d"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd5ec085-22a9-4c59-bcef-3df24abf8c82"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82d7f00c-3076-4853-a105-ca04bd37290f"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""473d6318-9b3f-4f14-87b6-aa80de29d8b8"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8859bb47-160c-4423-9476-a3441dd1e787"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8f2351d-8316-434b-8798-7f98bf5bd857"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""220c343e-5edd-4ef2-88e8-8696abdd9fd8"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlchemySlotRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -566,6 +690,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_LockOn = m_PlayerActions.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerActions_LockOnLeft = m_PlayerActions.FindAction("LockOnLeft", throwIfNotFound: true);
         m_PlayerActions_LockOnRight = m_PlayerActions.FindAction("LockOnRight", throwIfNotFound: true);
+        m_PlayerActions_AlchemySlotUp = m_PlayerActions.FindAction("AlchemySlotUp", throwIfNotFound: true);
+        m_PlayerActions_AlchemySlotDown = m_PlayerActions.FindAction("AlchemySlotDown", throwIfNotFound: true);
+        m_PlayerActions_AlchemySlotLeft = m_PlayerActions.FindAction("AlchemySlotLeft", throwIfNotFound: true);
+        m_PlayerActions_AlchemySlotRight = m_PlayerActions.FindAction("AlchemySlotRight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CancelBack = m_UI.FindAction("Cancel/Back", throwIfNotFound: true);
@@ -732,6 +860,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_LockOn;
     private readonly InputAction m_PlayerActions_LockOnLeft;
     private readonly InputAction m_PlayerActions_LockOnRight;
+    private readonly InputAction m_PlayerActions_AlchemySlotUp;
+    private readonly InputAction m_PlayerActions_AlchemySlotDown;
+    private readonly InputAction m_PlayerActions_AlchemySlotLeft;
+    private readonly InputAction m_PlayerActions_AlchemySlotRight;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -745,6 +877,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LockOn => m_Wrapper.m_PlayerActions_LockOn;
         public InputAction @LockOnLeft => m_Wrapper.m_PlayerActions_LockOnLeft;
         public InputAction @LockOnRight => m_Wrapper.m_PlayerActions_LockOnRight;
+        public InputAction @AlchemySlotUp => m_Wrapper.m_PlayerActions_AlchemySlotUp;
+        public InputAction @AlchemySlotDown => m_Wrapper.m_PlayerActions_AlchemySlotDown;
+        public InputAction @AlchemySlotLeft => m_Wrapper.m_PlayerActions_AlchemySlotLeft;
+        public InputAction @AlchemySlotRight => m_Wrapper.m_PlayerActions_AlchemySlotRight;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -781,6 +917,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LockOnRight.started += instance.OnLockOnRight;
             @LockOnRight.performed += instance.OnLockOnRight;
             @LockOnRight.canceled += instance.OnLockOnRight;
+            @AlchemySlotUp.started += instance.OnAlchemySlotUp;
+            @AlchemySlotUp.performed += instance.OnAlchemySlotUp;
+            @AlchemySlotUp.canceled += instance.OnAlchemySlotUp;
+            @AlchemySlotDown.started += instance.OnAlchemySlotDown;
+            @AlchemySlotDown.performed += instance.OnAlchemySlotDown;
+            @AlchemySlotDown.canceled += instance.OnAlchemySlotDown;
+            @AlchemySlotLeft.started += instance.OnAlchemySlotLeft;
+            @AlchemySlotLeft.performed += instance.OnAlchemySlotLeft;
+            @AlchemySlotLeft.canceled += instance.OnAlchemySlotLeft;
+            @AlchemySlotRight.started += instance.OnAlchemySlotRight;
+            @AlchemySlotRight.performed += instance.OnAlchemySlotRight;
+            @AlchemySlotRight.canceled += instance.OnAlchemySlotRight;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -812,6 +960,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LockOnRight.started -= instance.OnLockOnRight;
             @LockOnRight.performed -= instance.OnLockOnRight;
             @LockOnRight.canceled -= instance.OnLockOnRight;
+            @AlchemySlotUp.started -= instance.OnAlchemySlotUp;
+            @AlchemySlotUp.performed -= instance.OnAlchemySlotUp;
+            @AlchemySlotUp.canceled -= instance.OnAlchemySlotUp;
+            @AlchemySlotDown.started -= instance.OnAlchemySlotDown;
+            @AlchemySlotDown.performed -= instance.OnAlchemySlotDown;
+            @AlchemySlotDown.canceled -= instance.OnAlchemySlotDown;
+            @AlchemySlotLeft.started -= instance.OnAlchemySlotLeft;
+            @AlchemySlotLeft.performed -= instance.OnAlchemySlotLeft;
+            @AlchemySlotLeft.canceled -= instance.OnAlchemySlotLeft;
+            @AlchemySlotRight.started -= instance.OnAlchemySlotRight;
+            @AlchemySlotRight.performed -= instance.OnAlchemySlotRight;
+            @AlchemySlotRight.canceled -= instance.OnAlchemySlotRight;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -902,6 +1062,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLockOn(InputAction.CallbackContext context);
         void OnLockOnLeft(InputAction.CallbackContext context);
         void OnLockOnRight(InputAction.CallbackContext context);
+        void OnAlchemySlotUp(InputAction.CallbackContext context);
+        void OnAlchemySlotDown(InputAction.CallbackContext context);
+        void OnAlchemySlotLeft(InputAction.CallbackContext context);
+        void OnAlchemySlotRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

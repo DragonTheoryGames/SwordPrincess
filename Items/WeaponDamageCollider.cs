@@ -10,7 +10,13 @@ public class WeaponDamageCollider : DamageCollider {
 
     [Header("Weapon Attack Modifier")]
     public float swiftAttack01Modifier;
+    public float swiftAttack02Modifier;
+    public float swiftAttack03Modifier;
+    public float swiftAttack04Modifier;
     public float strongAttack01Modifier;
+    public float strongAttack02Modifier;
+    public float strongAttack03Modifier;
+    public float strongAttack04Modifier;
 
     protected override void Awake() {
         base.Awake();
@@ -57,8 +63,26 @@ public class WeaponDamageCollider : DamageCollider {
             case AttackType.SwiftAttack01:
                 ApplyAttackDamageModifiers(swiftAttack01Modifier, healthDamage);
                 break;
+            case AttackType.SwiftAttack02:
+                ApplyAttackDamageModifiers(swiftAttack02Modifier, healthDamage);
+                break;
+            case AttackType.SwiftAttack03:
+                ApplyAttackDamageModifiers(swiftAttack03Modifier, healthDamage);
+                break;
+            case AttackType.SwiftAttack04:
+                ApplyAttackDamageModifiers(swiftAttack04Modifier, healthDamage);
+                break;
             case AttackType.StrongAttack01:
                 ApplyAttackDamageModifiers(strongAttack01Modifier, healthDamage);
+                break;
+            case AttackType.StrongAttack02:
+                ApplyAttackDamageModifiers(strongAttack02Modifier, healthDamage);
+                break;
+            case AttackType.StrongAttack03:
+                ApplyAttackDamageModifiers(strongAttack03Modifier, healthDamage);
+                break;
+            case AttackType.StrongAttack04:
+                ApplyAttackDamageModifiers(strongAttack04Modifier, healthDamage);
                 break;
             default:
                 break;

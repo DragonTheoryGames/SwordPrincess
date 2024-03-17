@@ -67,17 +67,20 @@ public class CharacterAnimatorManager : MonoBehaviour {
 
     public virtual void PlayAttackAnimation(AttackType attackType, string animation, bool isPerformingAction, bool canRotate = false, bool canMove = false) {
         character.characterCombatManager.currentAttackType = attackType;
+        character.characterCombatManager.lastAttackAnimationPerfromed = animation;
         character.animator.CrossFade(animation, 0.2f);
         character.isPerformingAction = isPerformingAction;
         character.canMove = canMove;
         character.canRotate = canRotate;
 
-        //KEEP TRACK OF LAST ATTACK
-        //KEEP TRACK OF CURRENT ATTACK TYPE
         //UPDATE ANIMATION TO CURRENT WEAPON
         //CAN ATTACK BE PARRIED
         //TELL NETWORK WE ARE ATTACKING
 
         character.characterNetworkManager.NotifyServerofAttackAnimationServerRpc(NetworkManager.Singleton.LocalClientId, animation);
     }
+
+    public virtual void EnableCombo() {}
+
+    public virtual void DisableCombo() {}
 }

@@ -24,8 +24,14 @@ public class WeaponItem : Item {
     public float poiseDamage = 10;
 
     [Header("Attack Modifiers")]
-    public float swiftAttack01DamageModifier = 1;
+    public float swiftAttack01DamageModifier = 1.0f;
+    public float swiftAttack02DamageModifier = 1.2f;
+    public float swiftAttack03DamageModifier = 1.4f;
+    public float swiftAttack04DamageModifier = 1.6f;
     public float strongAttack01DamageModifier = 1.5f;
+    public float strongAttack02DamageModifier = 1.9f;
+    public float strongAttack03DamageModifier = 2.3f;
+    public float strongAttack04DamageModifier = 2.7f;
     // WEAPON MODIFIER
     // CRITICAL MOD
 

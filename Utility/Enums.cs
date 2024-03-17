@@ -29,5 +29,10 @@ public enum WeaponModelSlot {
 public enum AttackType {
     SwiftAttack01,
     SwiftAttack02,
+    SwiftAttack03,
+    SwiftAttack04,
     StrongAttack01,
+    StrongAttack02,
+    StrongAttack03,
+    StrongAttack04,
 }

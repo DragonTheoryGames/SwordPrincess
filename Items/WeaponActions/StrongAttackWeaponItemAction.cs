@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Character Actions/Weapon Actions/Strong Attack")]
 public class StrongAttackWeaponItemAction : WeaponItemAction {
 
-    [SerializeField] string HeavyCharge = "StrongAttack01";
+    [SerializeField] string strongAttack01 = "StrongAttack01";
+    [SerializeField] string strongAttack02 = "StrongAttack02";
+    [SerializeField] string strongAttack03 = "StrongAttack03";
+    [SerializeField] string strongAttack04 = "StrongAttack04";
 
     public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction) {
         base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
@@ -17,6 +20,23 @@ public class StrongAttackWeaponItemAction : WeaponItemAction {
     }
 
     void PerformSwiftAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction) {
-        playerPerformingAction.playerAnimatorManager.PlayAttackAnimation(AttackType.StrongAttack01, HeavyCharge, true);
+        if (playerPerformingAction.playerCombatManager.canCombo && playerPerformingAction.isPerformingAction) {
+            if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerfromed == strongAttack01) {
+                playerPerformingAction.playerAnimatorManager.PlayAttackAnimation(AttackType.SwiftAttack02, strongAttack02, true);
+            }
+            else if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerfromed == strongAttack02) {
+                playerPerformingAction.playerAnimatorManager.PlayAttackAnimation(AttackType.SwiftAttack03, strongAttack03, true);
+            }
+            else if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerfromed == strongAttack03) {
+                playerPerformingAction.playerAnimatorManager.PlayAttackAnimation(AttackType.SwiftAttack04, strongAttack04, true);
+            }
+            else {
+                playerPerformingAction.playerAnimatorManager.PlayAttackAnimation(AttackType.SwiftAttack01, strongAttack01, true);
+            }
+            
+        }
+        else if (!playerPerformingAction.isPerformingAction){
+            playerPerformingAction.playerAnimatorManager.PlayAttackAnimation(AttackType.SwiftAttack01, strongAttack01, true);
+        }
     }
 }

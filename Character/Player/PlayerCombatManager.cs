@@ -8,7 +8,9 @@ public class PlayerCombatManager : CharacterCombatManager {
     PlayerManager player;
 
     public WeaponItem currentWeapon;
-    
+
+    [Header("Flags")]
+    public bool canCombo = false;
 
     protected override void Awake() {
         base.Awake();
@@ -33,6 +35,9 @@ public class PlayerCombatManager : CharacterCombatManager {
         {
             case AttackType.SwiftAttack01:
                 staminaDeducted = currentWeapon.baseStaminaCost * currentWeapon.swiftAttack01StaminaMultiplier;
+                break;
+            case AttackType.StrongAttack01:
+                staminaDeducted = currentWeapon.baseStaminaCost * currentWeapon.strongAttack01StaminaMultiplier;
                 break;
             default:
                 break;
