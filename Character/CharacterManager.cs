@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class CharacterManager : NetworkBehaviour {
     
@@ -13,6 +14,9 @@ public class CharacterManager : NetworkBehaviour {
     [HideInInspector] public CharacterCombatManager characterCombatManager;
     [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
     [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
+
+    [Header("Character Group")]
+    public CharacterGroup characterGroup;
 
     [Header("Flags")]
     public bool isPerformingAction = false;
@@ -50,6 +54,10 @@ public class CharacterManager : NetworkBehaviour {
             transform.rotation = Quaternion.Slerp(transform.rotation, characterNetworkManager.networkRotation.Value, 
                 characterNetworkManager.networkRotationSmoothTime);
         }
+    }
+
+    protected virtual void FixedUpdate() {
+        
     }
 
     protected virtual void LateUpdate() {

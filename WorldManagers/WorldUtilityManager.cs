@@ -22,4 +22,22 @@ public class WorldUtilityManager : MonoBehaviour {
         return environmentLayers;
     }
 
+    public bool CanIDamageThisTarget(CharacterGroup attackingcharacter, CharacterGroup targetCharacter) {
+        if (attackingcharacter == CharacterGroup.Friendly) {
+            switch (targetCharacter) {
+                case CharacterGroup.Friendly: return false;
+                case CharacterGroup.Hostile: return true;
+                default: return false;
+            }
+        }
+        else if (attackingcharacter == CharacterGroup.Hostile) {
+            switch (targetCharacter) {
+                case CharacterGroup.Friendly: return true;
+                case CharacterGroup.Hostile: return false;
+                default: return false;
+            }
+        }
+        return false;
+    }
+
 }
