@@ -131,6 +131,8 @@ public class PlayerInputManager : MonoBehaviour {
         //IF LOCKED ON
         if (player == null) {return;}
 
+        player.playerNetworkManager.isMoving.Value = moveAmount != 0 ? true : false;
+
         if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value) {
             player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
         }
@@ -185,7 +187,7 @@ public class PlayerInputManager : MonoBehaviour {
     }
 
     void LockOnInput(){
-        if (player.playerNetworkManager.isLockedOn.Value) {
+        if (player.playerNetworkManager.isLockedOn.Value) { 
             if (player.playerCombatManager.currentTarget == null) {return;}
             
             if (player.playerCombatManager.currentTarget.isDead) {
@@ -195,17 +197,17 @@ public class PlayerInputManager : MonoBehaviour {
             //THIS ASSURES US THE COROUTINE ONLY RUNS ONCE AT A TIME
             if (lockOnCoroutine != null) {
                 StopCoroutine(lockOnCoroutine);
-                lockOnCoroutine = StartCoroutine(PlayerCamera.singleton.WaitThenFIndNewTargets());
+                lockOnCoroutine = StartCoroutine(PlayerCamera.singleton.WaitThenFindNewTargets());
             }
         }
-        if (lockOnInput && player.playerNetworkManager.isLockedOn.Value) {
+        if (lockOnInput && player.playerNetworkManager.isLockedOn.Value) { 
             lockOnInput = false;
             PlayerCamera.singleton.ClearLockOnTargets();
             player.playerNetworkManager.isLockedOn.Value = false;
             //Disable Lock On.
             return;
         }
-        if (lockOnInput && !player.playerNetworkManager.isLockedOn.Value) {
+        if (lockOnInput && !player.playerNetworkManager.isLockedOn.Value) { 
             lockOnInput = false; 
             //Enable Lock On
             PlayerCamera.singleton.TargetLockOn();

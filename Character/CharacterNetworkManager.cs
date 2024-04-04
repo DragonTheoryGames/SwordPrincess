@@ -17,12 +17,13 @@ public class CharacterNetworkManager : NetworkBehaviour {
     public float networkRotationSmoothTime = 0.1f;
 
     [Header("Animator")]
+    public NetworkVariable<bool> isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);    
     public NetworkVariable<float> horizontalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> verticalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> networkMoveAmount = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
    
     [Header("Target")]
-        public NetworkVariable<ulong> currentTargetNetworkObjectID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<ulong> currentTargetNetworkObjectID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
  
 
     [Header("Flags")]
@@ -74,8 +75,12 @@ public class CharacterNetworkManager : NetworkBehaviour {
         }
     }
 
-    public void OnIsChargingAttackChanged(bool oldStatus, bool newStatus) {
+    public void OnIsChargingAttackChanged(bool o, bool n) {
         character.animator.SetBool("isChargingAttack", isChargingAttack.Value);
+    }
+
+    public void OnIsMovingChanged(bool o, bool n) {
+        character.animator.SetBool("isMoving" ,isMoving.Value);
     }
 
     //ACTIONS
@@ -157,15 +162,15 @@ public class CharacterNetworkManager : NetworkBehaviour {
         float contactpointZ) {
 
         ProcessCharacterDamageFromServer(
-                damagedCharacterID, 
-                attackingCharacterID,
-                swiftDamage, 
-                heavyDamage, 
-                poiseDamage,
-                hitAngle,
-                contactpointX,
-                contactpointY,
-                contactpointZ
+            damagedCharacterID, 
+            attackingCharacterID,
+            swiftDamage, 
+            heavyDamage, 
+            poiseDamage,
+            hitAngle,
+            contactpointX,
+            contactpointY,
+            contactpointZ
         );
 
     }

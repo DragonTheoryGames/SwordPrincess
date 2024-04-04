@@ -126,7 +126,7 @@ public class PlayerCamera : MonoBehaviour {
         cameraMain.transform.localPosition = cameraMainPosition;
     }
 
-    public void TargetLockOn() {
+    public void TargetLockOn() { 
         float shortestDistance = Mathf.Infinity;
         float shortestDistanceLeft = -Mathf.Infinity;
         float shortestDistanceRight = Mathf.Infinity;
@@ -147,7 +147,7 @@ public class PlayerCamera : MonoBehaviour {
                 if (lockOnTarget.transform.root == player.transform.root) { continue; }
 
                 if (viewableAngle > minimumViewableAngle && viewableAngle < maximumViewableAngle) {
-                    RaycastHit hit;
+                    RaycastHit hit; 
                     if(Physics.Linecast(player.playerCombatManager.lockOnTransform.position, 
                                         lockOnTarget.characterCombatManager.lockOnTransform.position, 
                                         out hit, 
@@ -210,7 +210,7 @@ public class PlayerCamera : MonoBehaviour {
         availableTargets.Clear();
     }
 
-    public IEnumerator WaitThenFIndNewTargets() {
+    public IEnumerator WaitThenFindNewTargets() {
         while (player.isPerformingAction) {
             yield return null;
         }
