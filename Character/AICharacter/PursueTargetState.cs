@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,12 @@ public class PursueTargetState : AIState {
         }
         if (!aiCharacter.navMeshAgent.enabled) {
             aiCharacter.navMeshAgent.enabled = true;
+        }
+
+        // if target is outside FOV : pivot
+        if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minFOV - 30
+            || aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maxFOV + 30) {
+            aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
         }
 
         aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);

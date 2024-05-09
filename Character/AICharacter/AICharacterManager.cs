@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Netcode;
 
 public class AICharacterManager : CharacterManager {
 
@@ -37,7 +35,9 @@ public class AICharacterManager : CharacterManager {
     protected override void FixedUpdate() {
         base.FixedUpdate();
 
-        ProcessStateMachine();
+        if (IsOwner) {
+            ProcessStateMachine();
+        }
     }
 
     void ProcessStateMachine() {
@@ -50,6 +50,11 @@ public class AICharacterManager : CharacterManager {
         //RESETPOSITION?ROTATION AFTER THE STATE MACHINE HAS PROCESSED ITS TICK
         navMeshAgent.transform.localPosition = Vector3.zero;
         navMeshAgent.transform.localRotation = Quaternion.identity;
+
+        if (aiCharacterCombatManager.currentTarget != null) {
+            aiCharacterCombatManager.targetDirection = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
+            aiCharacterCombatManager.viewableAngle = WorldUtilityManager.singleton.GetAngleOfTarget(transform, aiCharacterCombatManager.targetDirection);
+        }
 
         if (navMeshAgent.enabled) {
             Vector3 agentDestination = navMeshAgent.destination;
